@@ -1,5 +1,7 @@
 package com.gmail.erofeev.st.alexei.service;
 
+import com.gmail.erofeev.st.alexei.service.exception.DataNotValidException;
+import com.gmail.erofeev.st.alexei.service.exception.WrongNumberOfArgumentsException;
 import com.gmail.erofeev.st.alexei.service.impl.NumberAdderServiceImpl;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,6 +33,7 @@ public class NumberAdderServiceTest {
         int result = numberAdderService.add(INPUT_DATA);
         Assert.assertEquals(EXPECTED_RESULT, result);
     }
+
     @Test
     public void shouldReturnTheSumForDoubleArgumentWithSemicolonSeparator() {
         final int EXPECTED_RESULT = 3;
@@ -40,6 +43,7 @@ public class NumberAdderServiceTest {
         int result = numberAdderService.add(INPUT_DATA);
         Assert.assertEquals(EXPECTED_RESULT, result);
     }
+
     @Test
     public void shouldReturnTheSumForDoubleArgumentWithVerticalSlashSeparator() {
         final int EXPECTED_RESULT = 3;
@@ -49,6 +53,7 @@ public class NumberAdderServiceTest {
         int result = numberAdderService.add(INPUT_DATA);
         Assert.assertEquals(EXPECTED_RESULT, result);
     }
+
     @Test
     public void shouldReturnTheSumForDoubleArgumentWithLineFeedSeparator() {
         final int EXPECTED_RESULT = 3;
@@ -58,4 +63,21 @@ public class NumberAdderServiceTest {
         int result = numberAdderService.add(INPUT_DATA);
         Assert.assertEquals(EXPECTED_RESULT, result);
     }
+
+    @Test(expected = DataNotValidException.class)
+    public void shouldThrowDataNotValidException() {
+        final String SEPARATOR = "\n";
+        final String INPUT_DATA = "a" + SEPARATOR + "2";
+        NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
+        int result = numberAdderService.add(INPUT_DATA);
+    }
+
+    @Test(expected = WrongNumberOfArgumentsException.class)
+    public void shouldWrongNumberOfArgumentsException() {
+        final String SEPARATOR = "\n";
+        final String INPUT_DATA = "1" + SEPARATOR + "2" + SEPARATOR + "3";
+        NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
+        int result = numberAdderService.add(INPUT_DATA);
+    }
+
 }
