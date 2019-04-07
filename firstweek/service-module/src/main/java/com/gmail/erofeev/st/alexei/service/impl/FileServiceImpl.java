@@ -25,7 +25,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public String getPatternStringFromFile(String fileName) {
+    public String getPatternStringFromFile(String fileName) throws RuntimeException{
         List<String> lines = fileRepository.getLines(fileName);
         String result = lines.stream()
                 .map(line -> numberAdderService.add(line) + "")

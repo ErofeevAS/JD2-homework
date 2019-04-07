@@ -6,6 +6,8 @@ import com.gmail.erofeev.st.alexei.service.exception.WrongNumberOfArgumentsExcep
 
 public class NumberAdderServiceImpl implements NumberAdderService {
     private static NumberAdderService instance;
+    private final static int AMOUNT_OF_ARGUMENTS = 2;
+    private final static String regex = "[,;|\n]";
 
     private NumberAdderServiceImpl() {
 
@@ -35,10 +37,9 @@ public class NumberAdderServiceImpl implements NumberAdderService {
     }
 
     private int[] validate(String line) {
-        String regex = "[,;|\n]";
         String[] numbers = line.split(regex);
         int[] validData;
-        if (!(numbers.length == 2 || numbers.length == 1)) {
+        if (!(numbers.length >= 1 && numbers.length <= AMOUNT_OF_ARGUMENTS)) {
             throw new WrongNumberOfArgumentsException("Number of arguments: " + numbers.length);
         }
         try {
@@ -52,7 +53,7 @@ public class NumberAdderServiceImpl implements NumberAdderService {
             }
             validData = new int[]{firstNumber, secondNumber};
         } catch (NumberFormatException e) {
-            throw new DataNotValidException(e);
+            throw new DataNotValidException(" Data must be number: " + e, e);
         }
         return validData;
     }

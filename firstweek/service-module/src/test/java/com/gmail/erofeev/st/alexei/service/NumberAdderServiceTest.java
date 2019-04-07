@@ -69,7 +69,7 @@ public class NumberAdderServiceTest {
         final String SEPARATOR = "\n";
         final String INPUT_DATA = "a" + SEPARATOR + "2";
         NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
-        int result = numberAdderService.add(INPUT_DATA);
+        numberAdderService.add(INPUT_DATA);
     }
 
     @Test(expected = WrongNumberOfArgumentsException.class)
@@ -77,7 +77,7 @@ public class NumberAdderServiceTest {
         final String SEPARATOR = "\n";
         final String INPUT_DATA = "1" + SEPARATOR + "2" + SEPARATOR + "3";
         NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
-        int result = numberAdderService.add(INPUT_DATA);
+        numberAdderService.add(INPUT_DATA);
     }
 
 }

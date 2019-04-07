@@ -5,23 +5,19 @@
             <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </Console>
 
-        <!--<RollingFile name="RollingFile" filename="logs/application.log">-->
-            <!--<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>-->
-            <!--<Policies>-->
-                <!--<SizeBasedTriggeringPolice size="10 MB"/>-->
-            <!--</Policies>-->
-            <!--<DefaultRolloverStrategy max="20"/>-->
-        <!--</RollingFile>-->
+        <RollingFile name="RollingFile" filename="logs/application.log" filePattern="${baseDir}/cim-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5p %c{1}:L - %msg%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
 
     </Appenders>
     <Loggers>
-        <!--<Logger name="com.gmail.erofeev.st.alexei" level="trace">-->
-            <!--<AppenderRef ref="Console"/>-->
-        <!--</Logger>-->
-
         <Root level="INFO">
             <AppenderRef ref="Console"/>
-            <!--<AppenderRef ref="RollingFile"/>-->
+            <AppenderRef ref="RollingFile"/>
         </Root>
     </Loggers>
 </Configuration>
