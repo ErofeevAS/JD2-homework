@@ -47,6 +47,7 @@ public class FileRepositoryImpl implements FileRepository {
             } catch (IOException e) {
                 String message = "Can't open file: " + fileName;
                 logger.error(message, e);
+                throw new RuntimeException(message, e);
             }
             return lines;
         }
