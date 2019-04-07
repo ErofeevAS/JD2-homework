@@ -5,7 +5,10 @@ import com.gmail.erofeev.st.alexei.repository.exception.EmptyNameException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,11 +44,9 @@ public class FileRepositoryImpl implements FileRepository {
                 String message = "File: " + fileName + " not found";
                 logger.error(message, e);
                 throw new RuntimeException(message, e);
-
             } catch (IOException e) {
                 String message = "Can't open file: " + fileName;
                 logger.error(message, e);
-
             }
             return lines;
         }

@@ -3,7 +3,7 @@ package com.gmail.erofeev.st.alexei.service.impl;
 import com.gmail.erofeev.st.alexei.repository.FileRepository;
 import com.gmail.erofeev.st.alexei.repository.impl.FileRepositoryImpl;
 import com.gmail.erofeev.st.alexei.service.FileService;
-import com.gmail.erofeev.st.alexei.service.NumberAdderService;
+import com.gmail.erofeev.st.alexei.service.util.NumberAdderUtil;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +15,6 @@ public class FileServiceImpl implements FileService {
     }
 
     private FileRepository fileRepository = FileRepositoryImpl.getInstance();
-    private NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
 
     public static FileService getInstance() {
         if (instance == null) {
@@ -25,11 +24,10 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public String getPatternStringFromFile(String fileName) throws RuntimeException{
+    public String getPatternStringFromFile(String fileName) {
         List<String> lines = fileRepository.getLines(fileName);
-        String result = lines.stream()
-                .map(line -> numberAdderService.add(line) + "")
+        return lines.stream()
+                .map(line -> NumberAdderUtil.add(line) + "")
                 .collect(Collectors.joining(","));
-        return result;
     }
 }

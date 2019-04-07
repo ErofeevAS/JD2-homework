@@ -2,16 +2,14 @@ package com.gmail.erofeev.st.alexei.service;
 
 import com.gmail.erofeev.st.alexei.service.exception.DataNotValidException;
 import com.gmail.erofeev.st.alexei.service.exception.WrongNumberOfArgumentsException;
-import com.gmail.erofeev.st.alexei.service.impl.NumberAdderServiceImpl;
+import com.gmail.erofeev.st.alexei.service.util.NumberAdderUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class NumberAdderServiceTest {
-
     @Test
     public void shouldReturnZeroForEmptyString() {
-        NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
-        int result = numberAdderService.add("");
+        int result = NumberAdderUtil.add("");
         Assert.assertEquals(0, result);
     }
 
@@ -19,8 +17,7 @@ public class NumberAdderServiceTest {
     public void shouldReturnSameNumberForSingleArgument() {
         final int EXPECTED_RESULT = 112312;
         final String INPUT_DATA = "112312";
-        NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
-        int result = numberAdderService.add(INPUT_DATA);
+        int result = NumberAdderUtil.add(INPUT_DATA);
         Assert.assertEquals(EXPECTED_RESULT, result);
     }
 
@@ -29,8 +26,7 @@ public class NumberAdderServiceTest {
         final int EXPECTED_RESULT = 3;
         final String SEPARATOR = ",";
         final String INPUT_DATA = "1" + SEPARATOR + "2";
-        NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
-        int result = numberAdderService.add(INPUT_DATA);
+        int result = NumberAdderUtil.add(INPUT_DATA);
         Assert.assertEquals(EXPECTED_RESULT, result);
     }
 
@@ -39,8 +35,7 @@ public class NumberAdderServiceTest {
         final int EXPECTED_RESULT = 3;
         final String SEPARATOR = ";";
         final String INPUT_DATA = "1" + SEPARATOR + "2";
-        NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
-        int result = numberAdderService.add(INPUT_DATA);
+        int result = NumberAdderUtil.add(INPUT_DATA);
         Assert.assertEquals(EXPECTED_RESULT, result);
     }
 
@@ -49,8 +44,7 @@ public class NumberAdderServiceTest {
         final int EXPECTED_RESULT = 3;
         final String SEPARATOR = "|";
         final String INPUT_DATA = "1" + SEPARATOR + "2";
-        NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
-        int result = numberAdderService.add(INPUT_DATA);
+        int result = NumberAdderUtil.add(INPUT_DATA);
         Assert.assertEquals(EXPECTED_RESULT, result);
     }
 
@@ -59,8 +53,7 @@ public class NumberAdderServiceTest {
         final int EXPECTED_RESULT = 3;
         final String SEPARATOR = "\n";
         final String INPUT_DATA = "1" + SEPARATOR + "2";
-        NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
-        int result = numberAdderService.add(INPUT_DATA);
+        int result = NumberAdderUtil.add(INPUT_DATA);
         Assert.assertEquals(EXPECTED_RESULT, result);
     }
 
@@ -68,16 +61,14 @@ public class NumberAdderServiceTest {
     public void shouldThrowDataNotValidException() {
         final String SEPARATOR = "\n";
         final String INPUT_DATA = "a" + SEPARATOR + "2";
-        NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
-        numberAdderService.add(INPUT_DATA);
+        NumberAdderUtil.add(INPUT_DATA);
     }
 
     @Test(expected = WrongNumberOfArgumentsException.class)
     public void shouldWrongNumberOfArgumentsException() {
         final String SEPARATOR = "\n";
         final String INPUT_DATA = "1" + SEPARATOR + "2" + SEPARATOR + "3";
-        NumberAdderService numberAdderService = NumberAdderServiceImpl.getInstance();
-        numberAdderService.add(INPUT_DATA);
+        NumberAdderUtil.add(INPUT_DATA);
     }
 
 }
